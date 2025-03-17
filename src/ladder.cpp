@@ -9,52 +9,44 @@ void error(string word1, string word2, string msg){
     cerr << word1 << " " << word2 << " " << msg << endl;
 }
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d){
-    int str1_len = str1.length();
-    int str2_len = str2.length();
-    
-    vector<int> v1(str2_len +1);
-    vector<int> v2(str2_len +1);
-
-    if (abs(str1_len - str2_len) > d) {
+    int size1 = str1.size();
+    int size2 = str2.size();
+    string longer, shorter;
+    if(size1 > size2){
+        longer = str1;
+        shorter = str2;
+    }else{
+        longer = str2;
+        shorter = str1;
+    }
+    if(longer.size() - shorter.size() > 1){
         return false;
     }
-
-    for(int i = 0; i<=str2_len; ++i){
-        v1[i] = i;
-    }
-
-    for(int i = 1; i<=str1_len; ++i){
-        v2[0] = i;
-
-        for(int j = 1; j <= str2_len; ++j){
-            int del_cost = v1[j-1] + 1;
-            int in_cost = v2[j-1] + 1;
-            // Note: if str1[i-1] == str2[j-1], subcost = v1[j] else subcost = v1[j] +1
-            int sub_cost = (str1[i - 1] == str2[j - 1]) ? v1[j - 1] : v1[j - 1] + 1;
-            v2[j] = min(del_cost, min(in_cost, sub_cost));
+    int count = 0;
+    for(int i = 0, j = 0; i < shorter.size() && j < longer.size(); ++i, ++j){
+        if(count >d) return false;
+        if(shorter[i] != longer[j]){
+            ++count;
+            ++j;
         }
-        swap(v1, v2);
     }
-    return v1[str2_len] <= d;
+   
+    return count <= d;
 }
 bool is_adjacent(const string& word1, const string& word2) {
-    if (word1.length() == word2.length()) {
-        return edit_distance_within(word1, word2, 1);
-    }
-    
-    if (abs(int(word1.length()) - int(word2.length())) == 1) {
-        const string& longer = word1.length() > word2.length() ? word1 : word2;
-        const string& shorter = word1.length() < word2.length() ? word1 : word2;
 
-        for (size_t i = 0; i < longer.length(); ++i) {
-            string modified = longer.substr(0, i) + longer.substr(i + 1);
-            if (modified == shorter) {
-                return true;
+    if(word1.size() != word2.size()){
+        return edit_distance_within(word1, word2, 1);
+    }else{
+        int count = 0;
+        for (int i = 0; i < word1.size(); ++i) {
+            if (word1[i] != word2[i]) {
+                ++count;
             }
         }
+        return count <= 1;
     }
-
-    return false;  // The words are not adjacent
+    return false;
 }
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list){
     queue<vector<string>> ladder_queue;
