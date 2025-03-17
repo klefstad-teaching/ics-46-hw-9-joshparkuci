@@ -67,11 +67,11 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     while(!ladder_queue.empty()){
         vector<string> ladder = ladder_queue.front();
         ladder_queue.pop();
-        string end = ladder.back();
+        string last = ladder.back();
 
         for(const string& word : word_list){
 
-            if(is_adjacent(end_word, word)){
+            if(is_adjacent(last, word)){
                 if(visited.find(word) == visited.end()){
                     
                     visited.insert(word);
