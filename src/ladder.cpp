@@ -13,7 +13,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     int str1_len = str1.length();
     int str2_len = str2.length();
     
-    vector<int> v1(str2_len +1);
+    vector<int> v1(str1_len +1);
     vector<int> v2(str2_len +1);
 
     if (abs(str1_len - str2_len) > d) {
