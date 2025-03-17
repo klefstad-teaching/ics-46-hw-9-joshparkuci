@@ -10,7 +10,7 @@ void error(string word1, string word2, string msg){
 }
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d){
     // no idea what this means
-    int str1_len = str2.length();
+    int str1_len = str1.length();
     int str2_len = str2.length();
     
     vector<int> v1(str2_len +1);
@@ -24,7 +24,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         v1[i] = i;
     }
 
-    for(int i = 1; i<=str2_len; ++i){
+    for(int i = 1; i<=str1_len; ++i){
         v2[0] = i;
 
         for(int j = 1; j <= str2_len; ++j){
