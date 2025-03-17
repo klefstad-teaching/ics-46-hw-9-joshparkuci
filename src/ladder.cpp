@@ -58,8 +58,8 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         for(string word : word_list){
 
             if(is_adjacent(end_word, word)){
-                int*ptr = nullptr;
-                cout << *ptr;
+                // int*ptr = nullptr; // segfault machine
+                // cout << *ptr;
                 if(visited.find(word) == visited.end()){
                     visited.insert(word);
                     vector<string> new_ladder = ladder;
