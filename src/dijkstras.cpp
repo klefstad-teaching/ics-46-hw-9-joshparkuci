@@ -9,10 +9,12 @@ using namespace std;
 
 vector<int> dijkstra_shortest_path(const Graph& graph, int source, vector<int>& previous){
     int numVertices = graph.size();
-    vector<int> distances(numVertices, INF);
+    // NOTE: Does this functionally do the same thing as .resize? It seems to, but idk if its just technicalities
+    // Update, the difference is the first is a declaration while the second is modifying an existing thing
+    vector<int> distances(numVertices, INF);  
     vector<bool> visited(numVertices, false);
     distances[source] = 0;
-    previous.resize(numVertices, UNDEFINED);
+    previous.resize(numVertices, UNDEFINED);  // NOTE: not resizing this gave me a segfault lol
     previous[source] = UNDEFINED;
     
     priority_queue<pair<int,int>, vector<pair<int, int>>, greater<pair<int,int>>> minHeap;
