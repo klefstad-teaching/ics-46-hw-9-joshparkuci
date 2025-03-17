@@ -75,11 +75,23 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     return {};
 }
 void load_words(set<string> & word_list, const string& file_name){
-    // put file words into word list
-    return;
+    ifstream in(file_name);
+
+    if(!in){
+        throw runtime_error("file no open :(");
+    }
+    string word;
+    while(in >> word){
+        word_list.insert(word);
+    }
+    
+    in.close();
 }
 void print_word_ladder(const vector<string>& ladder){
-    cout << "word ladder" << endl;
+    for (string word : ladder) {
+        cout << word << " ";
+    }
+    cout << endl;
 }
 void verify_word_ladder(){
     return;
