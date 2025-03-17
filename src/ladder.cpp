@@ -37,8 +37,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     }
     return v1[str2_len] <= d;
 }
-bool is_adjacent(const string& word1, const string& word2){
-    bool is_adjacent(const string& word1, const string& word2) {
+bool is_adjacent(const string& word1, const string& word2) {
     if (word1.length() == word2.length()) {
         return edit_distance_within(word1, word2, 1);
     }
@@ -56,7 +55,6 @@ bool is_adjacent(const string& word1, const string& word2){
     }
 
     return false;  // The words are not adjacent
-}
 }
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list){
     queue<vector<string>> ladder_queue;
