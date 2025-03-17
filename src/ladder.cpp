@@ -38,10 +38,25 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
     return v1[str2_len] <= d;
 }
 bool is_adjacent(const string& word1, const string& word2){
-    // check if two words are one letter off. NOTE THAT THIS IS TWO CASES
-    // cat -> bat  &&  cat -> chat (is this real)
-    // NOTE: both of these cases CANNOT occur at the same time as each other
-    return edit_distance_within(word1, word2, 1);
+    bool is_adjacent(const string& word1, const string& word2) {
+    if (word1.length() == word2.length()) {
+        return edit_distance_within(word1, word2, 1);
+    }
+    
+    if (abs(int(word1.length()) - int(word2.length())) == 1) {
+        const string& longer = word1.length() > word2.length() ? word1 : word2;
+        const string& shorter = word1.length() < word2.length() ? word1 : word2;
+
+        for (size_t i = 0; i < longer.length(); ++i) {
+            string modified = longer.substr(0, i) + longer.substr(i + 1);
+            if (modified == shorter) {
+                return true;
+            }
+        }
+    }
+
+    return false;  // The words are not adjacent
+}
 }
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list){
     queue<vector<string>> ladder_queue;
