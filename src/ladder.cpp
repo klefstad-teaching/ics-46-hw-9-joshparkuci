@@ -9,7 +9,6 @@ void error(string word1, string word2, string msg){
     cerr << word1 << " " << word2 << " " << msg << endl;
 }
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d){
-    // no idea what this means
     int str1_len = str1.length();
     int str2_len = str2.length();
     
