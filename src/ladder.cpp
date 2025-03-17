@@ -63,12 +63,12 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
             if(is_adjacent(end_word, word)){
 
-                // if(visited.find(word) == visited.end()){
+                if(visited.find(word) == visited.end()){
                     visited.insert(word);
                     vector<string> new_ladder = ladder;
                     new_ladder.push_back(word);
                     ladder_queue.push(new_ladder);
-                // }
+                }
             }
         }
     }
