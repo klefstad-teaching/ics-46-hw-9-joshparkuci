@@ -24,11 +24,11 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         v1[i] = i;
     }
 
-    for(int i = 0; i<=str2_len; ++i){
+    for(int i = 1; i<=str2_len; ++i){
         v2[0] = i;
 
         for(int j = 1; j <= str2_len; ++j){
-            int del_cost = v1[j+1] + 1;
+            int del_cost = v1[j] + 1;
             int in_cost = v2[j] + 1;
             // Note: if str1[i-1] == str2[j-1], subcost = v1[j] else subcost = v1[j] +1
             int sub_cost = (str1[i - 1] == str2[j - 1]) ? v1[j - 1] : v1[j - 1] + 1;
